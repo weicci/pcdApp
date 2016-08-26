@@ -1,0 +1,39 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+
+<?php
+$ves = $this->_ves;
+$vesData = $this->_vesData;
+$vesBlockData = isset($this->_vesBlockData)?$this->_vesBlockData:array();
+$html = '';
+$id = $block->getIdModifier() ? '-' . $block->getIdModifier() : time();
+?>
+
+<div class="header-links<?php echo isset($vesBlockData['css_class'])?' '.$vesBlockData['css_class']:''; ?>" id="ves-header-links<?php echo $id?>">
+  <div class="dropdown">
+    <div class=" dropdown-toggle header-setting-link-head" type="button" data-toggle="dropdown">
+    <div class="header-setting-link-head"> </div></div>
+     <ul class="dropdown-menu">
+       <li class="dropdown-submenu"></li>
+
+        <?php
+        $custom_links = unserialize($ves->getHeaderCfg('toplinks_settings/custom_links'));
+        unset($custom_links['__empty']);
+        foreach ($custom_links as $_link) { ?>
+        <li class=" <?php echo "header-setting-link-".$_link['classes'] ?>" >
+        <a  href="#<?php //echo $vesData->filter($_link['link']) ?>"  data-target="<?php //echo ".".$_link['title'] ?>" ><?php echo $_link['title'] ?></a>
+
+        </li>
+        <?php } ?>
+
+      </li>
+    </ul>
+  </div>
+</div>
